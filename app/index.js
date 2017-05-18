@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducers from './reducers';
 
 ReactDOM.render(
-    <div>
+    <Provider store={createStore(reducers)}>
         <h1>React app is working!</h1>
-    </div>,
+    </Provider>,
     document.getElementById('app')
 );
