@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch'
+import $ from 'jquery'
 
 export const SEARCH_FLICKR = 'SEARCH_FLICKR';
 
@@ -34,14 +34,9 @@ function receivePhotos(searchTerm, json) {
 export function fetchPhotos(searchTerm) {
     return function(dispatch) {
         dispatch(requestPhotos(searchTerm))
-        const api = 'https://api.flickr.com/services/feeds/photos_public.gne?format=jsonp&nojsoncallback=1&tags='
-        let headers = new Headers({
-            "Access-Control-Allow-Origin": "*"
+        const api = 'https://api.flickr.com/services/feeds/photos_public.gne?format=json&jsoncallback=?&tags='
+        return $.getJSON(api+encodeURIComponent(searchTerm), function(data) {
+               dispatch(receivePhotos(searchTerm, data))
         })
-        return fetch(api+encodeURIComponent(searchTerm), {headers: headers})
-            .then(response => response.json())
-            .then(json => 
-               dispatch(receivePhotos(searchTerm, json))
-           )
     }
 }

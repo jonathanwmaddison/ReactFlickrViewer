@@ -3,21 +3,28 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 class App extends Component {
     render() {
-        console.log(this.props)
+    let { photosBySearch, currentSearch } = this.props;
         return (
             <div>
                 <h1>From Component</h1>
-                {this.props.imageLibrary[0].title}
+                {
+                photosBySearch[currentSearch].isFetching ?
+                    <h3>Loading</h3> :
+                    photosBySearch[currentSearch].items.map((item) =>
+                        <a href={item.link}>{item.title}</a>
+                    )
+                }                    
             </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-    console.log(state)
-    let { imageLibrary } = state
+    let { imageLibrary, currentSearch, photosBySearch } = state
     return {
-        imageLibrary
+        imageLibrary,
+        currentSearch,
+        photosBySearch
     }
 }
 
