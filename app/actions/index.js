@@ -34,7 +34,7 @@ function receivePhotos(searchTerm, json) {
 export function fetchPhotos(searchTerm) {
     return function(dispatch) {
         dispatch(requestPhotos(searchTerm))
-        var api = 'http://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags='
+        var api = 'https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags='
         return fetch(api+encodeURIComponent(searchTerm))
             .then(response => respons.json())
             .then(json => 
