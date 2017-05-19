@@ -6920,7 +6920,7 @@ function receivePhotos(searchTerm, json) {
 function fetchPhotos(searchTerm) {
     return function (dispatch) {
         dispatch(requestPhotos(searchTerm));
-        var api = 'http://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags=';
+        var api = 'https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags=';
         return __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch___default()(api + encodeURIComponent(searchTerm)).then(response => respons.json()).then(json => dispatch(receivePhotos(searchTerm, json)));
     };
 }
