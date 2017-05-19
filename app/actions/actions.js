@@ -1,3 +1,5 @@
+import request from 'request'
+
 export const SEARCH_FLICKR = 'SEARCH_FLICKR';
 
 export function searchFlickr(searchTerm) {
