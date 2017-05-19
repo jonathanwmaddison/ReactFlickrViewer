@@ -1,4 +1,4 @@
-import request from 'request'
+import fetch from 'isomorphic-fetch'
 
 export const SEARCH_FLICKR = 'SEARCH_FLICKR';
 
@@ -35,13 +35,10 @@ export function fetchPhotos(searchTerm) {
     return function(dispatch) {
         dispatch(requestPhotos(searchTerm))
         var api = 'http://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags='
-        return request
-            .get(api+encodeURIComponent(searchTerm))
-            .on('response', function(response) {
-               dispatch(recievePhotos(searchTerm, response));
-            })
-            .on('error', function(error) {
-               console.log("error making api call ", error);
-            });
+        return fetch(api+encodeURIComponent(searchTerm))
+            .then(response => respons.json())
+            .then(json => 
+               dispatch(receivePhotos(searchTerm, json))
+           )
     }
 }
