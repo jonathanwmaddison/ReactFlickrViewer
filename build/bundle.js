@@ -6920,8 +6920,11 @@ function receivePhotos(searchTerm, json) {
 function fetchPhotos(searchTerm) {
     return function (dispatch) {
         dispatch(requestPhotos(searchTerm));
-        var api = 'https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags=';
-        return __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch___default()(api + encodeURIComponent(searchTerm)).then(response => respons.json()).then(json => dispatch(receivePhotos(searchTerm, json)));
+        const api = 'https://api.flickr.com/services/feeds/photos_public.gne?format=jsonp&nojsoncallback=1&tags=';
+        let headers = new Headers({
+            "Access-Control-Allow-Origin": "*"
+        });
+        return __WEBPACK_IMPORTED_MODULE_0_isomorphic_fetch___default()(api + encodeURIComponent(searchTerm), { headers: headers }).then(response => response.json()).then(json => dispatch(receivePhotos(searchTerm, json)));
     };
 }
 
