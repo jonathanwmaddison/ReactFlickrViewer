@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { searchFlickr, fetchPhotosIfNeeded } from '../actions'; 
+import { Row, Grid } from 'react-bootstrap'
 import Search from '../components/Search'
 import Card from '../components/Card'
 
@@ -24,17 +25,22 @@ class App extends Component {
     }
     render() {
     const { currentSearch, photosBySearch, isFetching, lastUpdated, photos } = this.props;
+
         return (
             <div>
+                <Grid>
                 {isFetching && photos.length === 0 &&
                     <h2>Loading</h2>
                 }
                 {!isFetching && photos.length > 0 &&
-                    photos.map((photo) => <Card photo={photo} />)
+                    <Row>
+                    {photos.map((photo) => <Card photo={photo} />)}
+                    </Row>
                 }
                 {isFetching && photos.length === 0 &&
                     <h2>No Photos found!</h2>
                 }
+                </Grid>
             </div>
         )
     }
