@@ -28,19 +28,17 @@ class App extends Component {
 
         return (
             <div>
-                <Grid>
                 {isFetching && photos.length === 0 &&
                     <h2>Loading</h2>
                 }
                 {!isFetching && photos.length > 0 &&
-                    <Row>
-                    {photos.map((photo) => <Card photo={photo} />)}
-                    </Row>
+                    <div className='photos'>
+                        {photos.map((photo) => <Card photo={photo} />)}
+                    </div>
                 }
                 {isFetching && photos.length === 0 &&
                     <h2>No Photos found!</h2>
                 }
-                </Grid>
             </div>
         )
     }

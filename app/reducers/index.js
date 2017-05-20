@@ -5,7 +5,7 @@ import {
 /**
  * Sets currentSearch state. initializes with San Francisco
 */
-function currentSearch(state = 'San Francisco', action) {
+function currentSearch(state = 'nature', action) {
     switch(action.type) {
         case SEARCH_FLICKR:
             return action.searchTerm
