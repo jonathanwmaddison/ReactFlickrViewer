@@ -27,6 +27,7 @@ class App extends Component {
 
         return (
             <div>
+                <Search onSearch={this.handleSearch.bind(this)}/>
                 {isFetching && photos.length === 0 &&
                     <h2>Loading</h2>
                 }

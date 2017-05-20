@@ -1,4 +1,5 @@
 body {
+    background-color: black;
     margin: 0;
     padding: 0;
 }
@@ -11,7 +12,21 @@ body {
 .photos img {
     width: 100% !important;
     height: auto !important;
-    //margin-bottom: 25px;
+}
+form {
+    text-align: center;
+    padding: 10px
+}
+input {
+    width: 50% !important;
+    margin-left: 25%;
+}
+button {
+    margin-top: 10px;
+}
+label {
+    font-size: 20px;
+    color: white;
 }
 .info {
     position: relative;
@@ -20,19 +35,16 @@ body {
 .card-text {
     display: none;  
     font-size: 15px;
-    color: black;
+    color: white;
     position: absolute;
     top: -15px;
     left: 7px;
 }
 a:hover img {
-    opacity: .5;
+    opacity: .3;
 }
 a:hover .info .card-text {
     display: block;
-}
-img {
-    //border: white 5px solid;
 }
 @media (max-width: 1200px) {
     .photos {
