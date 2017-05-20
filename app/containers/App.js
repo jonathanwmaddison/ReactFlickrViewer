@@ -10,13 +10,12 @@ class App extends Component {
         super(props)
     }
     componentDidMount() {
-        const { dispatch, searchTerm } = this.props;
-        dispatch(fetchPhotosIfNeeded(searchTerm));
+        const { dispatch, currentSearch } = this.props;
+        dispatch(fetchPhotosIfNeeded(currentSearch));
     }
     componentDidUpdate(previousProps) {
         if (this.props.currentSearch !== previousProps.currentSearch) {
             const { dispatch, currentSearch } = this.props;
-            console.log(currentSearch)
             dispatch(fetchPhotosIfNeeded(currentSearch))
         }
     }
@@ -25,7 +24,7 @@ class App extends Component {
         this.props.dispatch(fetchPhotosIfNeeded(newSearch))
     }
     render() {
-    const { currentSearch, photosBySearch, isFetching, lastUpdated } = this.props;
+    const { currentSearch, photosBySearch, isFetching, lastUpdated, photos } = this.props;
         return (
             <div>
                 <h1>From Component</h1>
@@ -34,7 +33,7 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = state => {
+function mapStateToProps(state) {
     let { currentSearch, photosBySearch } = state
     const {
         isFetching,
@@ -46,7 +45,7 @@ const mapStateToProps = state => {
     }
     return {
         currentSearch,
-        photosBySearch,
+        photos,
         isFetching,
         lastUpdated
     }

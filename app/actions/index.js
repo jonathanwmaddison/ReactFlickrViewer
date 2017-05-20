@@ -56,7 +56,6 @@ function shouldFetchPhotos(state, searchTerm) {
 export function fetchPhotosIfNeeded(searchTerm) {
     return (dispatch, getState) => {
         if(shouldFetchPhotos(getState(), searchTerm)) {
-            console.log('test', searchTerm)
             return dispatch(fetchPhotos(searchTerm))
         } else {
             return Promise.resolve()
