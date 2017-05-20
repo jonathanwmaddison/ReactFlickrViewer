@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { searchFlickr, fetchPhotosIfNeeded } from '../actions'; 
-import { Row, Grid } from 'react-bootstrap'
 import Search from '../components/Search'
 import Card from '../components/Card'
 
