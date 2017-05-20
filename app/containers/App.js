@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { searchFlickr, fetchPhotosIfNeeded } from '../actions'; 
 import Search from '../components/Search'
-import Index from '../components/Index'
 import Card from '../components/Card'
 
 class App extends Component {
@@ -27,7 +26,15 @@ class App extends Component {
     const { currentSearch, photosBySearch, isFetching, lastUpdated, photos } = this.props;
         return (
             <div>
-                <h1>From Component</h1>
+                {isFetching && photos.length === 0 &&
+                    <h2>Loading</h2>
+                }
+                {!isFetching && photos.length > 0 &&
+                    photos.map((photo) => <Card photo={photo} />)
+                }
+                {isFetching && photos.length === 0 &&
+                    <h2>No Photos found!</h2>
+                }
             </div>
         )
     }
