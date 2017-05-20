@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import ImageLibraryReducer from './ImageLibraryReducer'
 import {
     SEARCH_FLICKR, REQUEST_PHOTOS, RECEIVE_PHOTOS
 } from '../actions'
@@ -51,7 +50,6 @@ function photosBySearch(state = {}, action) {
     }
 }
 export default combineReducers({
-    imageLibrary: ImageLibraryReducer,
     photosBySearch,
     currentSearch
 })

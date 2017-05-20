@@ -1,30 +1,11 @@
 import 'babel-polyfill'
 
-import thunkMiddleware from 'redux-thunk'
-import { createLogger } from 'redux-logger'
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Root from './containers/Root';
 
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import { searchFlickr, fetchPhotos } from './actions'; 
-import reducers from './reducers';
-import App from './components/app';
-
-const loggerMiddleware = createLogger()
-const store = createStore(
-    reducers,
-    applyMiddleware(
-        thunkMiddleware,
-        loggerMiddleware
-    )
-)
-store.dispatch(searchFlickr('San Francisco'))
-store.dispatch(fetchPhotos('San Francisco')).then(console.log(store.getState()))
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <Root />,
     document.getElementById('app')
 );

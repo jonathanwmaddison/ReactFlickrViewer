@@ -14,7 +14,7 @@ export const REQUEST_PHOTOS = 'REQUEST_PHOTOS';
 function requestPhotos(searchTerm) {
     return {
         type: REQUEST_PHOTOS,
-        searchTerm
+        searchTerm: searchTerm
     }
 }
 
@@ -23,9 +23,9 @@ export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS';
 function receivePhotos(searchTerm, json) {
     return {
         type: RECEIVE_PHOTOS,
-        searchTerm,
+        searchTerm: searchTerm,
         photos: json.items,
-        recieved: Date.now()
+        received: Date.now()
     }
 }
 /**
@@ -38,5 +38,28 @@ export function fetchPhotos(searchTerm) {
         return $.getJSON(api+encodeURIComponent(searchTerm), function(data) {
                dispatch(receivePhotos(searchTerm, data))
         })
+    }
+}
+
+/**
+ *  This checks whether the tag has already been searched
+ */
+function shouldFetchPhotos(state, searchTerm) {
+    const photos = state.photosBySearch[searchTerm]
+    if(!photos) {
+        return true
+     } else {
+        return false
+     } 
+}
+
+export function fetchPhotosIfNeeded(searchTerm) {
+    return (dispatch, getState) => {
+        if(shouldFetchPhotos(getState(), searchTerm)) {
+            console.log('test', searchTerm)
+            return dispatch(fetchPhotos(searchTerm))
+        } else {
+            return Promise.resolve()
+        }
     }
 }
