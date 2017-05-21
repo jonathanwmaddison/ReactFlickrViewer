@@ -3,12 +3,12 @@ import styles from '../styles.css';
 
 export default class Card extends Component {
     render() {
-        const { photo } = this.props;
+        const { img, text, link } = this.props;
         return (
-                <a href={photo.link}>
-                    <img className='img-fluid' src={photo.media.m} />
+                <a href={link}>
+                    <img className='img-fluid' src={img} />
                     <div className='info'>
-                        <p className='card-text'>Photo by {photo.author.match(/"(.*?)"/)[1]}</p>
+                        <p className='card-text'>{text}</p>
                     </div>
                 </a>
         )

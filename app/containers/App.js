@@ -19,12 +19,11 @@ class App extends Component {
         }
     }
     handleSearch(newSearch) {
-        this.props.dispatch(searchFlickr(newSearch))
+        //this.props.dispatch(searchFlickr(newSearch))
         this.props.dispatch(fetchPhotosIfNeeded(newSearch))
     }
     render() {
-    const { currentSearch, photosBySearch, isFetching, lastUpdated, photos } = this.props;
-
+        const { currentSearch, photosBySearch, isFetching, lastUpdated, photos } = this.props;
         return (
             <div>
                 <Search onSearch={this.handleSearch.bind(this)}/>
@@ -33,12 +32,13 @@ class App extends Component {
                 }
                 {!isFetching && photos.length > 0 &&
                     <div className='photos'>
-                        {photos.map((photo) => <Card photo={photo} />)}
+                        {photos.map((photo) => <Card link={photo.link} img={photo.media.m} text={"Photo By "+photo.author.match(/"(.*?)"/)[1].slice(0,20)} />)}
                     </div>
                 }
-                {isFetching && photos.length === 0 &&
+                {!isFetching && photos.length === 0 &&
                     <h2>No Photos found!</h2>
                 }
+                <div id='signature'><label> Coded by <a href="https://www.github.com/jonathanwmaddison">Jonathan Maddison </a></label></div>
             </div>
         )
     }
