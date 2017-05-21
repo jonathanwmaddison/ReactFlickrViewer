@@ -1,10 +1,12 @@
+/*eslint-disable no-unused-vars*/
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../styles.css';
 
 export default class Card extends Component {
     render() {
-        const { img, text, link, id } = this.props;
+        const { img, text, link } = this.props;
         return (
                 <a href={link}>
                     <img className='img-fluid' src={img} />
@@ -19,6 +21,5 @@ export default class Card extends Component {
 Card.propTypes = {
     img: PropTypes.string.isRequired,
     text: PropTypes.string, 
-    link: PropTypes.string,
-    key: PropTypes.string
+    link: PropTypes.string
 }

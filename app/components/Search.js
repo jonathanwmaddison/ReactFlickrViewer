@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 class Search extends Component {
     handleSubmit(e) {
-            console.log(e)
             e.preventDefault();
             let searchTerm = document.getElementById('tag-search').value
             this.props.onSearch(searchTerm)
@@ -12,7 +11,7 @@ class Search extends Component {
             <div>
                 <form className='form-group' onSubmit={this.handleSubmit.bind(this)}> 
                     <label htmlFor='tag-search'>{this.props.title}</label>
-                    <input autoComplete="off" ref="input" type="text" className='form-control' id='tag-search' placeholder='tag' />
+                    <input autoComplete="off" type="text" className='form-control' id='tag-search' placeholder='tag' />
                     <button type='submit' className='btn btn-outline-primary'>Search</button>
                 </form>
             </div>
@@ -21,7 +20,7 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-    onSearch: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    onSearch: PropTypes.func,
+    title: PropTypes.string
 }
 export default Search;

@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { searchFlickr, fetchPhotosIfNeeded } from '../actions'; 
+import { fetchPhotosIfNeeded } from '../actions'; 
 import Search from '../components/Search'
 import Card from '../components/Card'
 
@@ -19,11 +20,10 @@ class App extends Component {
         }
     }
     handleSearch(newSearch) {
-        //this.props.dispatch(searchFlickr(newSearch))
         this.props.dispatch(fetchPhotosIfNeeded(newSearch))
     }
     render() {
-        const { currentSearch, photosBySearch, isFetching, lastUpdated, photos } = this.props;
+        const { isFetching, photos } = this.props;
         function processPhotos(photos) {
             return photos.map(function(photo) {
                 let id = photo.link;
@@ -79,4 +79,11 @@ function mapStateToProps(state) {
     }
 }
 
+App.propTypes = {
+    photos: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    lastUpdated: PropTypes.number,
+    dispatch: PropTypes.func.isRequired,
+    currentSearch: PropTypes.string.isRequired
+}
 export default connect(mapStateToProps)(App);
