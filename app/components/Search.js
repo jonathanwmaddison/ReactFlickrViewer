@@ -4,6 +4,7 @@ class Search extends Component {
     handleSubmit(e) {
             e.preventDefault();
             let searchTerm = document.getElementById('tag-search').value
+            document.getElementById('tag-search').value = ""
             this.props.onSearch(searchTerm)
     }
     render() {
