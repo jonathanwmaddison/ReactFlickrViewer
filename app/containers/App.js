@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPhotosIfNeeded } from '../actions'; 
-import Search from '../components/Search'
-import Card from '../components/Card'
+import { fetchPhotosIfNeeded } from '../actions';
+import Search from '../components/Search';
+import Card from '../components/Card';
 
 class App extends Component {
     constructor(props) {
@@ -16,28 +16,28 @@ class App extends Component {
     componentDidUpdate(previousProps) {
         if (this.props.currentSearch !== previousProps.currentSearch) {
             const { dispatch, currentSearch } = this.props;
-            dispatch(fetchPhotosIfNeeded(currentSearch))
+            dispatch(fetchPhotosIfNeeded(currentSearch));
         }
     }
     handleSearch(newSearch) {
-        this.props.dispatch(fetchPhotosIfNeeded(newSearch))
+        this.props.dispatch(fetchPhotosIfNeeded(newSearch));
     }
     render() {
         const { isFetching, photos } = this.props;
         function processPhotos(photos) {
             return photos.map(function(photo) {
                 let id = photo.link;
-                let position = id.lastIndexOf('/')
+                let position = id.lastIndexOf('/');
                 position = id.lastIndexOf('/', position - 1);
-                id = id.substring(position, id.length - 1)
-                let text = "Photo By "
-                text += photo.author.match(/"(.*?)"/)[1].slice(0,20)
+                id = id.substring(position, id.length - 1);
+                let text = 'Photo By ';
+                text += photo.author.match(/"(.*?)"/)[1].slice(0,20);
                 return <Card key={id} link={photo.link} img={photo.media.m} text={text} />
             })
         }
         return (
             <div>
-                <Search title="Search Flickr" onSearch={this.handleSearch.bind(this)}/>
+                <Search title='Search Flickr' onSearch={this.handleSearch.bind(this)}/>
                 {isFetching && photos.length === 0 &&
                     <h2>Loading</h2>
                 }
@@ -62,7 +62,7 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-    let { currentSearch, photosBySearch } = state
+    const { currentSearch, photosBySearch } = state;
     const {
         isFetching,
         lastUpdated,
