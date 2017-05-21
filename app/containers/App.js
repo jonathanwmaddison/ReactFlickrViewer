@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchPhotosIfNeeded } from '../actions';
+import { fetchPhotosIfNeeded, searchFlickr } from '../actions';
 import Search from '../components/Search';
 import Card from '../components/Card';
 
@@ -20,10 +20,14 @@ class App extends Component {
         }
     }
     handleSearch(newSearch) {
+        this.props.dispatch(searchFlickr(newSearch));
         this.props.dispatch(fetchPhotosIfNeeded(newSearch));
     }
     render() {
-        const { isFetching, photos } = this.props;
+        const { isFetching, photos, currentSearch } = this.props;
+        /**
+        * returns a Card for each photo
+        */
         function processPhotos(photos) {
             return photos.map(function(photo) {
                 let id = photo.link;
@@ -33,11 +37,12 @@ class App extends Component {
                 let text = 'Photo By ';
                 text += photo.author.match(/"(.*?)"/)[1].slice(0,20);
                 return <Card key={id} link={photo.link} img={photo.media.m} text={text} />
-            })
+            });
         }
         return (
             <div>
                 <Search title='Search Flickr' onSearch={this.handleSearch.bind(this)}/>
+                <div className="searchInfo"><h3>{currentSearch}</h3></div>
                 {isFetching && photos.length === 0 &&
                     <h2>Loading</h2>
                 }
