@@ -24,21 +24,38 @@ class App extends Component {
     }
     render() {
         const { currentSearch, photosBySearch, isFetching, lastUpdated, photos } = this.props;
+        function processPhotos(photos) {
+            return photos.map(function(photo) {
+                let id = photo.link;
+                let position = id.lastIndexOf('/')
+                position = id.lastIndexOf('/', position - 1);
+                id = id.substring(position, id.length - 1)
+                let text = "Photo By "
+                text += photo.author.match(/"(.*?)"/)[1].slice(0,20)
+                return <Card key={id} link={photo.link} img={photo.media.m} text={text} />
+            })
+        }
         return (
             <div>
-                <Search onSearch={this.handleSearch.bind(this)}/>
+                <Search title="Search Flickr" onSearch={this.handleSearch.bind(this)}/>
                 {isFetching && photos.length === 0 &&
                     <h2>Loading</h2>
                 }
                 {!isFetching && photos.length > 0 &&
                     <div className='photos'>
-                        {photos.map((photo) => <Card link={photo.link} img={photo.media.m} text={"Photo By "+photo.author.match(/"(.*?)"/)[1].slice(0,20)} />)}
+                    {processPhotos(photos)}
                     </div>
                 }
                 {!isFetching && photos.length === 0 &&
                     <h2>No Photos found!</h2>
                 }
-                <div id='signature'><label> Coded by <a href="https://www.github.com/jonathanwmaddison">Jonathan Maddison </a></label></div>
+                <div id='signature'>
+                    <label> Coded by 
+                        <a href="https://www.github.com/jonathanwmaddison">
+                            &nbsp;Jonathan Maddison 
+                        </a>
+                   </label>
+                </div>
             </div>
         )
     }

@@ -20,6 +20,11 @@ module.exports = {
                 loaders: ['style-loader', 'css-loader'],
                 exclude: /node_modules/,
                 include: __dirname
+            },
+            {
+                test: /\.js$/,
+                loaders: ['babel-loader','eslint-loader'],
+                exclude: /node_modules/,
             }
         ]
     },
