@@ -12,7 +12,7 @@ class Search extends Component {
             <div>
                 <form className='form-group' onSubmit={this.handleSubmit.bind(this)}> 
                     <label htmlFor='tag-search'>{this.props.title}</label>
-                    <input autoComplete="off" type="text" className='form-control' id='tag-search' placeholder='tag' />
+                    <input autoComplete="off" type="text" className='form-control' id='tag-search' placeholder='Enter tag' />
                     <button type='submit' className='btn btn-outline-primary'>Search</button>
                 </form>
             </div>

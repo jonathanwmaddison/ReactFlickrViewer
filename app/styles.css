@@ -16,6 +16,11 @@ button {
 input {
     width: 50% !important;
     margin-left: 25%;
+    color: black !important;
+    font-family: 'Work Sans', sans-serif;
+}
+input::-webkit-input-placeholder {
+    color: #D3D3D3 !important;
 }
 .searchInfo {
     text-align: center;
